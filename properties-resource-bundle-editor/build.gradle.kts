@@ -4,11 +4,11 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 plugins {
   id("java")
   id("org.jetbrains.kotlin.jvm") version "2.3.0"
-  id("org.jetbrains.intellij.platform") version "2.16.0"
+  id("org.jetbrains.intellij.platform") version "2.20.0"
 }
 
 group = "com.intellij.properties.bundle.editor"
-version = "262.0.1"
+version = "263.0.0"
 
 repositories {
   mavenCentral()
@@ -19,13 +19,12 @@ repositories {
 
 dependencies {
   intellijPlatform {
-    intellijIdea("2026.2.3")
+    intellijIdea("2026.3")
     bundledPlugin("com.intellij.properties")
     bundledPlugin("intellij.structureView.plugin")
     // the plugins below are not used directly, they are required by the Properties plugin at runtime
     bundledPlugin("intellij.structuralSearch.plugin")
     bundledPlugin("com.intellij.copyright")
-    bundledPlugin("intellij.libraries.misc.plugin")
 
     testFramework(TestFrameworkType.Platform)
   }
@@ -52,11 +51,12 @@ java.sourceSets["test"].java {
 intellijPlatform {
   pluginConfiguration {
     ideaVersion {
-      sinceBuild = "262"
+      sinceBuild = "263"
     }
 
     changeNotes = """
       <ul>
+        <li>Built against IntelliJ IDEA 2026.3 (263)</li>
         <li>Fixed lost and misdirected edits</li>
         <li>Fixed threading errors</li>
         <li>The order of keys is now computed in the background, keeping the UI responsive (IDEA-395129)</li>
