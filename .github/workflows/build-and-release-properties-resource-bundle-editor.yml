@@ -33,8 +33,14 @@ jobs:
         working-directory: properties-resource-bundle-editor
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          tag_name: resource-bundle-editor-v${{ steps.version.outputs.version }}
-          name: Resource Bundle Editor v${{ steps.version.outputs.version }}
-          files: properties-resource-bundle-editor/build/distributions/*.zip
+        # gh is preinstalled on GitHub-hosted runners; fails if a release for this tag already exists
+        run: |
+          gh release create "resource-bundle-editor-v$VERSION" \
+            --title "Resource Bundle Editor v$VERSION" \
+            --target "$GITHUB_SHA" \
+            --notes "Built from $GITHUB_SHA" \
+            properties-resource-bundle-editor/build/distributions/*.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ steps.version.outputs.version }}

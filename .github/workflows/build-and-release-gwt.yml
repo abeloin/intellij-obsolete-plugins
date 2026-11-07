@@ -33,8 +33,14 @@ jobs:
         working-directory: gwt
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          tag_name: gwt-v${{ steps.version.outputs.version }}
-          name: GWT v${{ steps.version.outputs.version }}
-          files: gwt/build/distributions/*.zip
+        # gh is preinstalled on GitHub-hosted runners; fails if a release for this tag already exists
+        run: |
+          gh release create "gwt-v$VERSION" \
+            --title "GWT v$VERSION" \
+            --target "$GITHUB_SHA" \
+            --notes "Built from $GITHUB_SHA" \
+            gwt/build/distributions/*.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ steps.version.outputs.version }}
