@@ -8,11 +8,11 @@
 -->
 <plugins>
   <plugin id="com.intellij.gwt"
-          version="263.0.0"
-          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/gwt-v263.0.0/GWT-263.0.0.zip">
+          version="263.0.1"
+          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/gwt-v263.0.1/GWT-263.0.1.zip">
     <idea-version since-build="263"/>
     <name>GWT</name>
-    <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin (community fork)</vendor>
+    <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin</vendor>
     <description><![CDATA[
       Google Web Toolkit support for IntelliJ IDEA Ultimate, rebuilt from the
       <a href="https://github.com/JetBrains/intellij-obsolete-plugins/tree/master/gwt">JetBrains obsolete-plugins sources</a>
@@ -21,16 +21,19 @@
     <change-notes><![CDATA[
       <ul>
         <li>Built against IntelliJ IDEA 2026.3 (263)</li>
-        <li>Fixed API usages reported by Plugin Verifier for 2026.3</li>
+        <li>Replaced API usages that are override-only or scheduled for removal, as reported by Plugin Verifier</li>
+        <li>GWT CSS (ClientBundle) stubs moved to the new stub API; GWT CSS files are re-indexed on first start</li>
+        <li>Spring integration no longer depends on internal Spring plugin modules</li>
+        <li>Vendor now points to the community-maintained fork</li>
       </ul>
     ]]></change-notes>
   </plugin>
   <plugin id="com.intellij.properties.bundle.editor"
-          version="263.0.0"
-          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/resource-bundle-editor-v263.0.0/Properties.Resource.Bundle.Editor-263.0.0.zip">
+          version="263.0.1"
+          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/resource-bundle-editor-v263.0.1/Properties.Resource.Bundle.Editor-263.0.1.zip">
     <idea-version since-build="263"/>
     <name>Resource Bundle Editor</name>
-    <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin (community fork)</vendor>
+    <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin</vendor>
     <description><![CDATA[
       Editor for Java resource bundles (sets of .properties files) for IntelliJ IDEA, rebuilt from the
       <a href="https://github.com/JetBrains/intellij-obsolete-plugins/tree/master/properties-resource-bundle-editor">JetBrains obsolete-plugins sources</a>.
@@ -38,6 +41,7 @@
     <change-notes><![CDATA[
       <ul>
         <li>Built against IntelliJ IDEA 2026.3 (263)</li>
+        <li>Vendor now points to the community-maintained fork</li>
         <li>Fixed lost and misdirected edits</li>
         <li>Fixed threading errors</li>
         <li>The order of keys is now computed in the background, keeping the UI responsive (IDEA-395129)</li>
