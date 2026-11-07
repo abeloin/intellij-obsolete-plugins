@@ -25,4 +25,26 @@
       </ul>
     ]]></change-notes>
   </plugin>
+  <plugin id="com.intellij.properties.bundle.editor"
+          version="263.0.0"
+          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/resource-bundle-editor-v263.0.0/Properties.Resource.Bundle.Editor-263.0.0.zip">
+    <idea-version since-build="263"/>
+    <name>Resource Bundle Editor</name>
+    <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin (community fork)</vendor>
+    <description><![CDATA[
+      Editor for Java resource bundles (sets of .properties files) for IntelliJ IDEA, rebuilt from the
+      <a href="https://github.com/JetBrains/intellij-obsolete-plugins/tree/master/properties-resource-bundle-editor">JetBrains obsolete-plugins sources</a>.
+    ]]></description>
+    <change-notes><![CDATA[
+      <ul>
+        <li>Built against IntelliJ IDEA 2026.3 (263)</li>
+        <li>Fixed lost and misdirected edits</li>
+        <li>Fixed threading errors</li>
+        <li>The order of keys is now computed in the background, keeping the UI responsive (IDEA-395129)</li>
+        <li>Undo now reverts unsaved and saved edits immediately and in editing order (IDEA-395149)</li>
+        <li>Pending edits are now written when documents are saved (IDEA-395112)</li>
+        <li>The edited property now stays selected when undoing a saved edit (IDEA-395212)</li>
+      </ul>
+    ]]></change-notes>
+  </plugin>
 </plugins>
