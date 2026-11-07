@@ -101,7 +101,15 @@ intellijPlatform {
             sinceBuild = properties("pluginSinceBuild")
         }
 
-        changeNotes = ""
+        changeNotes = """
+            <ul>
+              <li>Built against IntelliJ IDEA 2026.3 (263)</li>
+              <li>Replaced API usages that are override-only or scheduled for removal, as reported by Plugin Verifier</li>
+              <li>GWT CSS (ClientBundle) stubs moved to the new stub API; GWT CSS files are re-indexed on first start</li>
+              <li>Spring integration no longer depends on internal Spring plugin modules</li>
+              <li>Vendor now points to the community-maintained fork</li>
+            </ul>
+        """.trimIndent()
     }
 }
 

@@ -75,7 +75,7 @@
   <depends optional="true" config-file="gwt-maven-support.xml">org.jetbrains.idea.maven</depends>
   <depends optional="true" config-file="gradle-support.xml">org.jetbrains.plugins.gradle</depends>
   <depends optional="true" config-file="javascript-debugger.xml">JavaScriptDebugger</depends>
-  <vendor>JetBrains</vendor>
+  <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin</vendor>
   <category>JVM Frameworks</category>
 
   <extensionPoints>
