@@ -108,6 +108,7 @@ intellijPlatform {
               <li>GWT CSS (ClientBundle) stubs moved to the new stub API; GWT CSS files are re-indexed on first start</li>
               <li>Spring integration no longer depends on internal Spring plugin modules</li>
               <li>Vendor now points to the community-maintained fork</li>
+              <li>Recognizes GWT 2.12 and 2.13; client language level now goes up to Java 11 from GWT 2.9 and Java 17 from GWT 2.12</li>
             </ul>
         """.trimIndent()
     }
