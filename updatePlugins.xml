@@ -8,8 +8,8 @@
 -->
 <plugins>
   <plugin id="com.intellij.gwt"
-          version="263.0.1"
-          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/gwt-v263.0.1/GWT-263.0.1.zip">
+          version="263.0.2"
+          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/gwt-v263.0.2/GWT-263.0.2.zip">
     <idea-version since-build="263"/>
     <name>GWT</name>
     <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin</vendor>
@@ -25,6 +25,7 @@
         <li>GWT CSS (ClientBundle) stubs moved to the new stub API; GWT CSS files are re-indexed on first start</li>
         <li>Spring integration no longer depends on internal Spring plugin modules</li>
         <li>Vendor now points to the community-maintained fork</li>
+        <li>Recognizes GWT 2.12 and 2.13; client language level now goes up to Java 11 from GWT 2.9 and Java 17 from GWT 2.12</li>
       </ul>
     ]]></change-notes>
   </plugin>
