@@ -47,7 +47,7 @@ Open these first depending on the area:
   `src/com/intellij/gwt/sdk/GwtSdkType.java` (extension point for SDK layouts),
   `src/com/intellij/gwt/sdk/impl/GwtVersionImpl.java` + `GwtVersionDetector.java`. **The
   `GwtVersionImpl` capability flags gate features throughout the plugin — this is where you teach the
-  plugin about a new GWT version.** JPS-side path layouts live in
+  plugin about a new GWT version. See §12 for the per-version Java table.** JPS-side path layouts live in
   `jps-plugin/src/org/jetbrains/jps/gwt/model/impl/sdk/` (default / Maven / Gradle / Vaadin).
 
 ## 4. Language & code-insight
@@ -159,3 +159,29 @@ Declared in `resources/META-INF/plugin.xml`, all `dynamic`:
   `org.jetbrains.jps.gwt.build` (JPS side, incl. `GwtBuilder`). These stay in VCS only because of the
   `!**/src/**/build/` negations in the root `.gitignore` — keep those, and if you add a file under any
   `.../src/.../build/` package, confirm `git status` actually shows it.
+
+## 12. GWT versions and Java levels
+
+What each GWT release accepts, from the [GWT release notes](https://www.gwtproject.org/release-notes.html).
+"Max client source level" is what `GwtVersionImpl.getHighestSupportedLanguageLevel()` returns; it is the
+default and the upper bound for the facet's client language level. "Tools JDK" is the JDK that runs the
+GWT compiler and dev mode. The plugin does not check it; the run configuration simply uses the module JDK
+or the alternative JRE. "—" means the release notes don't say.
+
+| GWT | `GwtVersionImpl` | Max client source level | Tools JDK | Release-note source |
+|-----|------------------|-------------------------|-----------|---------------------|
+| ≤ 2.4 | `VERSION_2_4` and older | Java 6 | — | — |
+| 2.5 | `VERSION_2_5` | Java 6 | 7 allowed | 2.5.0 RC2: "The GWT tools can now run on JDK 7. (However, no JDK 7 language or library features are available in GWT code yet.)" |
+| 2.6 – 2.7 | `VERSION_2_6`, `VERSION_2_7` | Java 7 (default) | — | 2.6.0 RC1: "Java 7 is supported and is now the default." |
+| 2.8 | `VERSION_2_8` | Java 8 (default) | — | 2.8.0 Beta1: "Java 8 syntax supported."; RC1: "Source level set to Java 8." |
+| 2.9 | `VERSION_2_9` | Java 11 | 8+ (7 unsupported) | 2.9.0: "Added support for Java language levels 9, 10, and 11." and "Officially, support is dropped for running the GWT compiler or server-side tooling on Java 7." |
+| 2.10 | `VERSION_2_10` | Java 11 | 8+, tested on 17 | 2.10.0: "Tested support for running on Java 17, dropped remaining support for running on Java 7." |
+| 2.11 | `VERSION_2_11` | Java 11 | 8+, tested on 21 | 2.11.0: "Tested support for running on Java 21. This is likely to be the final minor release series to support running on Java 8." |
+| 2.12 | `VERSION_2_12` | Java 17 | 11+ (server code may stay on 8) | 2.12.0: "Added support for Java 12-17 language features" and "Minimum Java version 11 is required to run any dev tools" |
+| 2.13 | `VERSION_2_13` (`LATEST`) | Java 17 | 11+ | 2.13.0: "2.13 is likely to be the last release where the compiler and dev tools run on Java 11" |
+
+Adding a GWT version:
+- Add the enum constant to `GwtVersionImpl`, and update `LATEST`.
+- Add the version string to `GwtVersionDetector.getGwtVersionFromString` (newest first).
+- If the release notes raise the source level, update `getHighestSupportedLanguageLevel()`.
+- Extend `test/com/intellij/gwt/sdk/GwtVersionTest.java` and this table.
