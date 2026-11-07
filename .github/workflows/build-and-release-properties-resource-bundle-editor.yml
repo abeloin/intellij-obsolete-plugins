@@ -4,19 +4,22 @@ name: Build and Release Resource Bundle Editor
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write  # create the GitHub Release and upload the plugin zip
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '25'
 
       - name: Build with Gradle
         run: ./gradlew buildPlugin
@@ -30,7 +33,7 @@ jobs:
         working-directory: properties-resource-bundle-editor
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: resource-bundle-editor-v${{ steps.version.outputs.version }}
           name: Resource Bundle Editor v${{ steps.version.outputs.version }}
