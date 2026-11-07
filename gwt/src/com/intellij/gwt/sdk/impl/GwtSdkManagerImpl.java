@@ -28,6 +28,7 @@ import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.util.xmlb.annotations.XCollection;
+import kotlinx.coroutines.CoroutineScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,8 +44,8 @@ public final class GwtSdkManagerImpl extends GwtSdkManager implements Persistent
   private final Map<String, GwtSdk> myGwtSdkMap = new HashMap<>();
   private GwtSdkList myGwtSdkList = new GwtSdkList();
 
-  public GwtSdkManagerImpl() {
-    GwtSdkType.EP_NAME.addChangeListener(myGwtSdkMap::clear, null);
+  public GwtSdkManagerImpl(@NotNull CoroutineScope coroutineScope) {
+    GwtSdkType.EP_NAME.addChangeListener(coroutineScope, myGwtSdkMap::clear);
   }
 
   @Override

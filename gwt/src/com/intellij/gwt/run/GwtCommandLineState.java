@@ -50,7 +50,6 @@ import com.intellij.javaee.web.WebRoot;
 import com.intellij.javaee.web.artifact.WebArtifactUtil;
 import com.intellij.javaee.web.facet.WebFacet;
 import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationGroup;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -86,6 +85,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.GlobalSearchScopesCore;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.ArrayUtilRt;
+import com.intellij.util.EnvironmentUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.PathUtil;
 import com.intellij.util.PathsList;
@@ -112,8 +112,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -278,7 +280,10 @@ public final class GwtCommandLineState extends JavaCommandLineStateEx {
     else {
       programParameters.add(runPage);
     }
-    params.setupEnvs(myRunConfigurationState.ENVIRONMENT_VARIABLES, myRunConfigurationState.PASS_PARENT_ENVS);
+    Map<String, String> envs = new HashMap<>(myRunConfigurationState.ENVIRONMENT_VARIABLES);
+    EnvironmentUtil.inlineParentOccurrences(envs);
+    params.setEnv(envs);
+    params.setPassParentEnvs(myRunConfigurationState.PASS_PARENT_ENVS);
 
     final GwtSdk sdk = myFacet.getConfiguration().getSdk();
     classPath.addFirst(sdk.getDevJarPath());
@@ -657,6 +662,9 @@ public final class GwtCommandLineState extends JavaCommandLineStateEx {
   }
 
   private static final class IdeGwtDependenciesResolver implements GwtDependenciesResolver {
+    // registered as <notificationGroup id="GWT"> in plugin.xml
+    private static final String GWT_NOTIFICATION_GROUP_ID = "GWT";
+
     private final Project myProject;
     private final GwtDependenciesStorage myDependenciesStorage;
 
@@ -671,7 +679,7 @@ public final class GwtCommandLineState extends JavaCommandLineStateEx {
         return myDependenciesStorage.getDependenciesPaths(groupId, artifactId, version);
       }
       catch (JpsGwtDependenciesStorage.GwtDependenciesNotFoundException e) {
-        new Notification(NotificationGroup.createIdWithTitle("GWT", GwtBundle.message("gwt.notification.display.id")), e.getMessage(),
+        new Notification(GWT_NOTIFICATION_GROUP_ID, e.getMessage(),
                          NotificationType.WARNING)
           .setImportant(false)
           .notify(myProject);
@@ -695,7 +703,7 @@ public final class GwtCommandLineState extends JavaCommandLineStateEx {
         }
       }
 
-      new Notification(NotificationGroup.createIdWithTitle("GWT", GwtBundle.message("gwt.notification.display.id")), StringUtil.join(messages, "\n"),
+      new Notification(GWT_NOTIFICATION_GROUP_ID, StringUtil.join(messages, "\n"),
                        NotificationType.WARNING)
         .setImportant(false)
         .notify(myProject);

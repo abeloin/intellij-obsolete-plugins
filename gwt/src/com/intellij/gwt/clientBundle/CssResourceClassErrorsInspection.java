@@ -29,7 +29,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.PsiLiteral;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiNameHelper;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -91,7 +90,7 @@ public final class CssResourceClassErrorsInspection extends BaseGwtInspection {
 
           final PsiElement place;
           final ProblemHighlightType type;
-          final PsiLiteral literal = methodElement.getClassNameAttributeElement().getPsiLiteral();
+          final PsiElement literal = methodElement.getClassNameAttributeElement().getLanguageInjectionHost();
           if (literal != null) {
             place = literal;
             type = ProblemHighlightType.LIKE_UNKNOWN_SYMBOL;

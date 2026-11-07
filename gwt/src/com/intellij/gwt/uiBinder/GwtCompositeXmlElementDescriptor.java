@@ -122,8 +122,9 @@ public class GwtCompositeXmlElementDescriptor implements XmlElementDescriptor, X
 
   @Override
   public XmlAttributeDescriptor getAttributeDescriptor(XmlAttribute attribute) {
-    final XmlAttributeDescriptor descriptor = myMainDescriptor.getAttributeDescriptor(attribute);
-    return descriptor != null ? descriptor : myAdditionalDescriptor.getAttributeDescriptor(attribute);
+    // XmlElementDescriptor.getAttributeDescriptor(XmlAttribute) is @OverrideOnly and must not be invoked on the
+    // delegates, so resolve through the name-based lookup, which consults both of them.
+    return getAttributeDescriptor(attribute.getName(), attribute.getParent());
   }
 
   @Override

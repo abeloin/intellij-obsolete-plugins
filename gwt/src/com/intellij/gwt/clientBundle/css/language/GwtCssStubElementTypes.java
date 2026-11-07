@@ -1,20 +1,31 @@
 package com.intellij.gwt.clientBundle.css.language;
 
 import com.intellij.psi.css.impl.stubs.CssStubDefinition;
+import com.intellij.psi.css.impl.stubs.base.ICssStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.IStubFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 public final class GwtCssStubElementTypes {
-  // CssStylesheetStubElementType is deprecated for removal in favor of CssStylesheetStubSerializingFactory, but that
-  // replacement is not yet present in the targeted platform (2026.2), so keep the current base type. Referenced by
-  // fully-qualified name (no import) so the suppression below fully covers the deprecated-for-removal usage.
-  @SuppressWarnings("removal")
-  public static final com.intellij.psi.css.impl.stubs.CssStylesheetStubElementType GWT_CSS_STYLESHEET =
-    new com.intellij.psi.css.impl.stubs.CssStylesheetStubElementType("GWT_CSS_STYLESHEET", GwtCssLanguage.GWT_CSS_LANGUAGE);
+  // Stub serialization and PSI creation for this element type are registered separately:
+  // see GwtCssStubRegistryExtension and GwtCssParserDefinition.createElement().
+  public static final IElementType GWT_CSS_STYLESHEET = new GwtCssStylesheetElementType("GWT_CSS_STYLESHEET");
 
   public static final IFileElementType GWT_CSS_FILE = new GwtCssFileElementType();
 
+
+  private static final class GwtCssStylesheetElementType extends IElementType implements ICssStubElementType {
+    GwtCssStylesheetElementType(@NotNull String debugName) {
+      super(debugName, GwtCssLanguage.GWT_CSS_LANGUAGE);
+    }
+
+    // same presentation as the former CssStylesheetStubElementType (used by PSI dumps)
+    @Override
+    public String toString() {
+      return "PsiElement(" + super.toString() + ")";
+    }
+  }
 
   private static class GwtCssFileElementType extends IStubFileElementType {
 
@@ -29,7 +40,8 @@ public final class GwtCssStubElementTypes {
 
     @Override
     public int getStubVersion() {
-      return 1 + CssStubDefinition.BASE_VERSION;
+      // bumped from 1 when the stylesheet stub moved to CssStylesheetStubSerializingFactory
+      return 2 + CssStubDefinition.BASE_VERSION;
     }
   }
 }

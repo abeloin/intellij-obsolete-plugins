@@ -22,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -76,14 +75,11 @@ public class ChooseGwtModulesDialog extends DialogWrapper {
   }
 
   public @NotNull List<String> getSelectedModules() {
-    final List<String> modules = new ArrayList<>();
-    TreeUtil.traverse(myRoot, node -> {
-      if (node instanceof GwtModuleCheckedTreeNode && ((GwtModuleCheckedTreeNode)node).isChecked()) {
-        modules.add(((GwtModuleCheckedTreeNode)node).getQualifiedModuleName());
-      }
-      return true;
-    });
-    return modules;
+    return TreeUtil.treeNodeTraverser(myRoot)
+      .filter(GwtModuleCheckedTreeNode.class)
+      .filter(GwtModuleCheckedTreeNode::isChecked)
+      .map(GwtModuleCheckedTreeNode::getQualifiedModuleName)
+      .toList();
   }
 
   @Override

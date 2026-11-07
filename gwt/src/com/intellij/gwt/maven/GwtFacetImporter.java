@@ -91,7 +91,7 @@ public abstract class GwtFacetImporter extends FacetImporter<GwtFacet, GwtFacetC
       File file = libs.getFile();
       if (file.exists()) {
         try {
-          ZipUtil.extract(file, file.getParentFile(), null, false);
+          ZipUtil.extract(file.toPath(), file.getParentFile().toPath(), null, false);
         }
         catch (IOException e) {
           MavenLog.LOG.warn("cannot unpack gwt libraries" + e);

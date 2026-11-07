@@ -126,6 +126,7 @@
 
     <lang.parserDefinition language="GWT-CSS" implementationClass="com.intellij.gwt.clientBundle.css.language.GwtCssParserDefinition"/>
     <stubElementTypeHolder class="com.intellij.gwt.clientBundle.css.language.GwtCssStubElementTypes"/>
+    <stubElementRegistryExtension implementation="com.intellij.gwt.clientBundle.css.language.GwtCssStubRegistryExtension"/>
     <lang.ast.factory language="GWT-CSS" implementationClass="com.intellij.gwt.clientBundle.css.language.GwtCssTreeElementFactory"/>
     <lang.substitutor language="CSS" implementationClass="com.intellij.gwt.clientBundle.css.language.GwtCssLanguageSubstitutor"/>
     <lang.formatter language="GWT-CSS" implementationClass="com.intellij.gwt.clientBundle.css.language.GwtCssFormattingModelBuilder"/>
