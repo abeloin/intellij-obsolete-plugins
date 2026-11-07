@@ -4,6 +4,9 @@ name: Build and Release GWT
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write  # create the GitHub Release and upload the plugin zip
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
