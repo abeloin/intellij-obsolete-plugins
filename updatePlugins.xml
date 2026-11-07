@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Custom IntelliJ plugin repository for community-maintained builds of plugins from
+  JetBrains/intellij-obsolete-plugins.
+
+  Add this URL in Settings | Plugins | ⚙ | Manage Plugin Repositories…:
+  https://raw.githubusercontent.com/abeloin/intellij-obsolete-plugins/plugin-repository/updatePlugins.xml
+-->
+<plugins>
+  <plugin id="com.intellij.gwt"
+          version="263.0.0"
+          url="https://github.com/abeloin/intellij-obsolete-plugins/releases/download/gwt-v263.0.0/GWT-263.0.0.zip">
+    <idea-version since-build="263"/>
+    <name>GWT</name>
+    <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin (community fork)</vendor>
+    <description><![CDATA[
+      Google Web Toolkit support for IntelliJ IDEA Ultimate, rebuilt from the
+      <a href="https://github.com/JetBrains/intellij-obsolete-plugins/tree/master/gwt">JetBrains obsolete-plugins sources</a>
+      after the plugin was removed from JetBrains Marketplace.
+    ]]></description>
+    <change-notes><![CDATA[
+      <ul>
+        <li>Built against IntelliJ IDEA 2026.3 (263)</li>
+        <li>Fixed API usages reported by Plugin Verifier for 2026.3</li>
+      </ul>
+    ]]></change-notes>
+  </plugin>
+</plugins>
