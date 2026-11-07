@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.intellij.properties.bundle.editor"
-version = "263.0.0"
+version = "263.0.1"
 
 repositories {
   mavenCentral()
@@ -57,6 +57,7 @@ intellijPlatform {
     changeNotes = """
       <ul>
         <li>Built against IntelliJ IDEA 2026.3 (263)</li>
+        <li>Vendor now points to the community-maintained fork</li>
         <li>Fixed lost and misdirected edits</li>
         <li>Fixed threading errors</li>
         <li>The order of keys is now computed in the background, keeping the UI responsive (IDEA-395129)</li>

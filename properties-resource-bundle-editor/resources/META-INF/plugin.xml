@@ -7,7 +7,7 @@
   <description>
     Provides dedicated editor for .properties bundles.
   </description>
-  <vendor>JetBrains</vendor>
+  <vendor url="https://github.com/abeloin/intellij-obsolete-plugins">Alexandre Beloin</vendor>
 
   <depends>com.intellij.properties</depends>
   <depends>intellij.structureView.plugin</depends>
