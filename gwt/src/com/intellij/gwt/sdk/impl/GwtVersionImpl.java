@@ -24,9 +24,11 @@ public enum GwtVersionImpl implements GwtVersion {
   VERSION_2_8,
   VERSION_2_9,
   VERSION_2_10,
-  VERSION_2_11;
+  VERSION_2_11,
+  VERSION_2_12,
+  VERSION_2_13;
 
-  public static final GwtVersionImpl LATEST = VERSION_2_11;
+  public static final GwtVersionImpl LATEST = VERSION_2_13;
 
   private static final @NonNls String[] GWT_15_SAMPLE_TEMPLATES = {
       "java/client/App.java.ft",
@@ -243,10 +245,12 @@ public enum GwtVersionImpl implements GwtVersion {
 
   @Override
   public @NotNull LanguageLevel getHighestSupportedLanguageLevel() {
-    if (isAtLeast(VERSION_2_11)) {
+    // Per the GWT release notes: 2.12.0 "Added support for Java 12-17 language features",
+    // 2.9.0 "Added support for Java language levels 9, 10, and 11", 2.8.0 "Source level set to Java 8".
+    if (isAtLeast(VERSION_2_12)) {
       return LanguageLevel.JDK_17;
     }
-    if (isAtLeast(VERSION_2_10)) {
+    if (isAtLeast(VERSION_2_9)) {
       return LanguageLevel.JDK_11;
     }
     if (isAtLeast(VERSION_2_8)) {
